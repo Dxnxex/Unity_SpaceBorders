@@ -2,22 +2,33 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
+
+    [Header("Pohyb")]
+    [Tooltip("Jakou rychlostí se bude asteroid pohybovat")]
     public float speed = 2f;
 
     [Header("Životy")]
     [Tooltip("Kolik poškození asteroid přežije")]
     public int health = 5;
 
-    public int damage = 1;
-    private float rotationSpeed;
-
 
     [Header("Rotace")]
-    private int maxRPM = 30;
+    [Tooltip("Kolik je maximálních otáček za minutu")]
+    private int maxRPM = 60;
+    private float rotationSpeed;
+
+    [Header("Sprites")]
+    [Tooltip("Obrázky určené k náhodnému určení")]
+    public Sprite[] possibleSprites;
 
 
     void Start()
     {
+
+        //Nastaví náhodný sprite
+        RandomSprite();
+
+
         rotationSpeed = Random.Range(-GameMath.SetRPM(maxRPM), GameMath.SetRPM(maxRPM));
 
     }
@@ -63,5 +74,15 @@ public class Asteroid : MonoBehaviour
     {
         transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime);
     }
-    
+
+
+    void RandomSprite()
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (possibleSprites != null && possibleSprites.Length > 0)
+        {
+            int index = Random.Range(0, possibleSprites.Length);
+            sr.sprite = possibleSprites[index];
+        }
+    }
 }
