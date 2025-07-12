@@ -5,7 +5,9 @@ public class Asteroid : MonoBehaviour
 
     [Header("Pohyb")]
     [Tooltip("Jakou rychlostí se bude asteroid pohybovat")]
-    public float speed = 2f;
+    public float speed = 4f;
+    private float originalSpeed;
+    private float slowTimer = 0f;
 
     [Header("Životy")]
     [Tooltip("Kolik poškození asteroid přežije")]
@@ -24,6 +26,8 @@ public class Asteroid : MonoBehaviour
 
     void Start()
     {
+        //Pre-set virables
+        originalSpeed = speed;
 
         //Nastaví náhodný sprite
         RandomSprite();
@@ -37,6 +41,7 @@ public class Asteroid : MonoBehaviour
     {
         transform.position += Vector3.down * speed * Time.deltaTime;
         AsteroidRotation();
+        resetCooldowns();
     }
 
 
@@ -46,7 +51,6 @@ public class Asteroid : MonoBehaviour
     {
         if (other.CompareTag("Bullet"))
         {
-            Debug.Log("[ASTEROID] Collision with projectile");
 
             // Zjisti damage ze střely 
             projectileScript bullet = other.GetComponent<projectileScript>();
@@ -54,6 +58,14 @@ public class Asteroid : MonoBehaviour
             {
                 TakeDamage(bullet.damage);
             }
+
+            #region IcyCore
+            if (RelicManager.Instance.isRelicEnabled<IcyCoreRelic>())
+            {
+                var icyCore = RelicManager.Instance.GetRelic<IcyCoreRelic>();
+                ApplySlow(icyCore.slowFactor, icyCore.slowTimer);
+            }
+            #endregion
 
             // Znič střelu
             Destroy(other.gameObject);
@@ -85,4 +97,27 @@ public class Asteroid : MonoBehaviour
             sr.sprite = possibleSprites[index];
         }
     }
+
+    public void ApplySlow(float slowFactor, float duration)
+    {
+        speed = originalSpeed * (1f - slowFactor / 100f);
+        slowTimer = duration;
+    }
+
+
+    private void resetCooldowns()
+    {
+
+        //Slow
+        if (slowTimer > 0)
+        {
+            slowTimer -= Time.deltaTime;
+            if (slowTimer <= 0) { speed = originalSpeed; }
+        }
+        
+        //Other
+        
+    }
+
+
 }

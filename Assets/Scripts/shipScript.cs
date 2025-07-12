@@ -3,23 +3,65 @@ using UnityEngine.InputSystem;
 
 public class shipScript : MonoBehaviour
 {
-
+    [Header("Rychlost")]
     public float speed = 5f;
-    public float rotationSpeed = 3f;
     public float acceleration = 15f;
     public float deceleration = 1.0f;
     public float maxSpeed = 35.0f;
     private float currentSpeed = 0f;
 
+    [Header("Rotace")]
+    public float rotationSpeed = 3f;
+
+    [Header("Střelba")]
     public GameObject ProjectilePrefab;  // Prefab střely
     public Transform firePoint;      // Místo odkud střela vyletí
-    public float shootCooldown = 0.2f;
+    private int magazine = 0;
+    public int magazineMax = 25;
+    public float projectileSpeed = 55f;
+    public int ammo = 120;
+    public int ammoMax = 900;
+    public float precision = 14f;
+    public float fireSpeedCooldown = 0.2f;
     private float lastShotTime;
-    
+
+    [Header("Obrana")]
+    public float lives = 100;
+    public float shiled = 200;
+
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        gameObject.name = "Dxnxex";
+        //První nabití
+        magazine = magazineMax;
+
+        #region Belt
+        
+        //Získání relikvie
+        RelicManager.Instance.obtainRelic<BeltRelic>();
+
+
+        if (RelicManager.Instance.isRelicEnabled<BeltRelic>())
+        {
+            ammo += RelicManager.Instance.GetRelic<BeltRelic>().ammo;
+            ammoMax += RelicManager.Instance.GetRelic<BeltRelic>().ammo;
+
+            RelicManager.Instance.GetRelic<BeltRelic>().obtained = true;
+
+        }
+
+        #endregion
+
+
+        #region Debugs
+
+        Debug.Log("Ship started with ammo: " + ammo);
+        Debug.Log("Ship started with max ammo: " + ammoMax);
+
+        #endregion
+
     }
 
     // Update is called once per frame
@@ -30,13 +72,13 @@ public class shipScript : MonoBehaviour
         MoveToLeft();
         LookAtMouse();
 
-
-        if (Keyboard.current.spaceKey.isPressed && Time.time >= lastShotTime + shootCooldown)
+        #region Střílení
+        if (Keyboard.current.spaceKey.isPressed && Time.time >= lastShotTime + fireSpeedCooldown)
         {
             Shoot();
             lastShotTime = Time.time;
         }
-
+        #endregion
 
 
         bool accelerating = Keyboard.current.wKey.isPressed;
@@ -57,9 +99,6 @@ public class shipScript : MonoBehaviour
         transform.position += transform.right * currentSpeed * Time.deltaTime;
 
     }
-
-
-
 
     private void MoveToLeft()
     {
@@ -83,8 +122,6 @@ public class shipScript : MonoBehaviour
         }
     }
 
-
-
     private void LookAtMouse()
     {
         Vector2 mousePos = Mouse.current.position.ReadValue();
@@ -98,7 +135,6 @@ public class shipScript : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
-
 
     private void Shoot()
     {
