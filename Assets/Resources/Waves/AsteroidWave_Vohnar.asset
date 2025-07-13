@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b5352b2379ca741b117fa1c325923e, type: 3}
+  m_Name: AsteroidWave_Vohnar
+  m_EditorClassIdentifier: 
+  spawnTimes:
+  - 1
+  - 2
+  - 4
+  asteroidPrefabs:
+  - {fileID: 3334424492760634877, guid: ab3f9aff50a90654784ebb38ea3771f7, type: 3}
+  - {fileID: 3334424492760634877, guid: ab3f9aff50a90654784ebb38ea3771f7, type: 3}
+  - {fileID: 3334424492760634877, guid: ab3f9aff50a90654784ebb38ea3771f7, type: 3}

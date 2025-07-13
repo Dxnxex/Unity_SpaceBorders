@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f930fbb774cf9c4fb27571da6481b6d, type: 3}
-  m_Name: Bolt
+  m_Script: {fileID: 11500000, guid: 8bcdb66a28d3dc54ca678ed6bd4a9bcd, type: 3}
+  m_Name: Scatre
   m_EditorClassIdentifier: 
-  relicName: Belt
-  description: "P\u0159id\xE1 munici do z\xE1sobn\xEDku"
+  relicName: 
+  description: 
   image: {fileID: 0}
   rarity: 0
   enabled: 1
   obtained: 0
-  ammo: 100
+  scatrePieces: 4

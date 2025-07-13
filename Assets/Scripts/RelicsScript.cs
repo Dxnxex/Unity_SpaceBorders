@@ -13,6 +13,7 @@ public abstract class RelicData : ScriptableObject
 
     public bool enabled = true;
     
+    [System.NonSerialized]
     public bool obtained = false;
 
 

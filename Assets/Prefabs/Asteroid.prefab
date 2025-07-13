@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  health: 5
+  health: 500
   possibleSprites:
   - {fileID: -4055590878293644509, guid: cfc1395baf6e0a848b1ed63ba37fe300, type: 3}
   - {fileID: 7574398061930389243, guid: 871b876096a80e64681c8393aa671547, type: 3}

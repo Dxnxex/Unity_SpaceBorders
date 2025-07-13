@@ -34,31 +34,44 @@ public class shipScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //První nabití
-        magazine = magazineMax;
+
 
         #region Belt
-        
-        //Získání relikvie
-        RelicManager.Instance.obtainRelic<BeltRelic>();
-
 
         if (RelicManager.Instance.isRelicEnabled<BeltRelic>())
-        {
-            ammo += RelicManager.Instance.GetRelic<BeltRelic>().ammo;
-            ammoMax += RelicManager.Instance.GetRelic<BeltRelic>().ammo;
+            {
+                ammo += RelicManager.Instance.GetRelic<BeltRelic>().ammo;
+                ammoMax += RelicManager.Instance.GetRelic<BeltRelic>().ammo;
 
-            RelicManager.Instance.GetRelic<BeltRelic>().obtained = true;
+                RelicManager.Instance.obtainRelic<BeltRelic>();
 
-        }
+            }
+
+        #endregion
+
+        #region ExtendedMagazine
+
+        if (RelicManager.Instance.isRelicEnabled<ExtendedMagazine>())
+            {
+                magazineMax += RelicManager.Instance.GetRelic<ExtendedMagazine>().ammo;
+
+                RelicManager.Instance.obtainRelic<ExtendedMagazine>();
+            }
 
         #endregion
 
 
+        //After
+        magazine = magazineMax;
+
+
         #region Debugs
 
-        Debug.Log("Ship started with ammo: " + ammo);
-        Debug.Log("Ship started with max ammo: " + ammoMax);
+            Debug.Log("Ship started with ammo: " + ammo);
+            Debug.Log("Ship started with max ammo: " + ammoMax);
+            
+            Debug.Log("Ship started with magazine: " + magazine);
+            Debug.Log("Ship started with max magazine: " + magazineMax);
 
         #endregion
 
