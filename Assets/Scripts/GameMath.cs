@@ -14,7 +14,7 @@ public static class GameMath
     /// </summary>
     public static float SetFPM(float fpm)
     {
-        return fpm / 60f;
+        return (fpm / 60f);
     }
 }
 

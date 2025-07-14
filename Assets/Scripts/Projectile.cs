@@ -36,9 +36,6 @@ public class projectileScript : MonoBehaviour
 
         #endregion
 
-
-
-
         #region Debugs
 
             Debug.Log("Projectile damage: " + damage);

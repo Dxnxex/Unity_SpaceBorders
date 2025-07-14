@@ -18,5 +18,5 @@ MonoBehaviour:
   - 4
   asteroidPrefabs:
   - {fileID: 3334424492760634877, guid: ab3f9aff50a90654784ebb38ea3771f7, type: 3}
-  - {fileID: 3334424492760634877, guid: ab3f9aff50a90654784ebb38ea3771f7, type: 3}
+  - {fileID: 3334424492760634877, guid: 55abd01cc4308b44fb1579f0bf280c3b, type: 3}
   - {fileID: 3334424492760634877, guid: ab3f9aff50a90654784ebb38ea3771f7, type: 3}
